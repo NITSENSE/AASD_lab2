@@ -4,6 +4,20 @@
 #include <iostream>
 #include <random>
 #include <stdexcept>
+#include <string>
+struct Student {
+	std::string name;
+	std::string lastname;
+	int number_grup;
+	int score;
+	Student(std::string name, std::string lastname, int number_grup, int score) : name(name), lastname(lastname), number_grup(number_grup), score(score){}
+	friend std::ostream& operator<<(std::ostream&os, const Student&st) {
+		os << st.name << " " << st.lastname << " " << st.number_grup << " " << st.score;
+		return os;
+	}
+};
+
+
 template<typename T>
 struct Node {
 	T data;
@@ -171,6 +185,29 @@ public:
 		while (temp!= nullptr) {
 			std::cout << temp->data << std::endl;
 			temp = temp->next;
+		}
+	}
+
+
+	void delete_student() {
+		Node<Student>* temp = _head;
+		Node<Student>* pre = nullptr;
+		while (temp != nullptr) {
+			if ((temp->data.score < 3) && (!pre)) {
+				temp = temp->next;
+				pop_head();
+				--_size;
+			}
+			else if (temp->data.score < 3) {
+				pre->next = temp->next;
+				delete temp;
+				temp = pre->next;
+				--_size;
+			}
+			else {
+				pre = temp;
+				temp = temp->next;
+			}
 		}
 	}
 };
