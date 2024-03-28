@@ -13,7 +13,13 @@ int main() {
 	Student_list.push_tail(Student("Даня", "Зайцев", 4, 2));
 	Student_list.push_tail(Student("Саша", "Антонов", 5, 3));
 	Student_list.push_tail(Student("Артем", "Тимошенко", 1, 4));
+	std::cout << "___________________________________" << std::endl;
+	std::cout << "Список студентов до отчисления:" << std::endl;
+	std::cout << "___________________________________" << "\n\n" << std::endl;
 	Student_list.print();
+	std::cout << "\n\n" << "___________________________________" << std::endl;
+	std::cout << "Список студентов после отчисления:" << std::endl;
+	std::cout << "___________________________________" << "\n\n" << std::endl;
 	Student_list.delete_student();
 	Student_list.print();
 	

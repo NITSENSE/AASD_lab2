@@ -70,8 +70,9 @@ public:
 		if (!_head)
 			throw std::invalid_argument("the list is empty");
 		Node<T>* temp = _head;
-		while (temp->next) temp = temp->next;
-		delete temp;
+		while (temp->next->next) temp = temp->next;
+		delete temp->next;
+		temp->next = nullptr;
 		_size--;
 	}
 
@@ -130,6 +131,7 @@ public:
 
 	void push_head(T data) {
 		Node<T>* element = new Node<T>(data);
+		++_size;
 		if (_head == nullptr) _head = element;
 		else {
 			element->next = _head;
@@ -171,7 +173,7 @@ public:
 	}
 
 	T& operator[](const int index) {
-		if ((index > _size) || (index < 0))
+		if ((index >= _size) || (index < 0))
 			throw std::invalid_argument("invalid index");
 		Node<T>* temp = _head;
 		for (int i = 0; i != index; ++i) {
