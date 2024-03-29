@@ -70,6 +70,8 @@ public:
 		if (!_head)
 			throw std::invalid_argument("the list is empty");
 		Node<T>* temp = _head;
+		if (_size == 1)
+			pop_head();
 		while (temp->next->next) temp = temp->next;
 		delete temp->next;
 		temp->next = nullptr;
@@ -80,7 +82,6 @@ public:
 		while (_head) {
 			pop_head();
 		}
-		_size = 0;
 	}
 	
 	LinkedList(size_t size, T lower_bound, T upper_bound) : LinkedList() {
@@ -141,11 +142,13 @@ public:
 
 	void push_head(const LinkedList<T>& other) {
 		if (this != &other) {
-			Node<T>* temp = other._head;
-			while (temp) {
+			for (int i = other._size - 1; i >= 0; i--) {
+				Node<T>* temp = other._head;
+				for (int j = 0; j < i; j++)
+					temp = temp->next;
 				push_head(temp->data);
-				temp = temp->next;
-			}
+				_size++;
+			}		
 		}
 	}
 

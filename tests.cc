@@ -64,8 +64,8 @@ TEST(LinkedListTest, PushHeadOther) {
     lst2.push_head(4);
     lst1.push_head(lst2);
 
-    EXPECT_EQ(lst1[0], 3);
-    EXPECT_EQ(lst1[1], 4);
+    EXPECT_EQ(lst1[0], 4);
+    EXPECT_EQ(lst1[1], 3);
     EXPECT_EQ(lst1[2], 2);
     EXPECT_EQ(lst1[3], 1);
 }
